@@ -289,6 +289,16 @@ export default function MaterialPortfolio() {
             >
               ORBITAL
             </button>
+            <button
+              onClick={() => setProjection('panorama')}
+              className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
+                projection === 'panorama'
+                  ? 'bg-white/15 text-white font-medium shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+            >
+              PANORAMA
+            </button>
           </div>
 
           {/* Autoplay Drift Toggle */}
