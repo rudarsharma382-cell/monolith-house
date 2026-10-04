@@ -11,7 +11,8 @@ mountMaterialPortfolio();
 mountMasonryGallery(() => {
   const target = document.getElementById('act-06');
   if (target) {
-    lenis.scrollTo(target, { offset: 0, duration: 1.6 });
+    lenis.start();
+    lenis.scrollTo(target, { offset: 0, duration: 1.3 });
     setActiveNav('night');
   }
 });
@@ -510,6 +511,16 @@ if (btnOpenSpecOutro) btnOpenSpecOutro.addEventListener('click', openDrawer);
 if (specDrawerClose) specDrawerClose.addEventListener('click', closeDrawer);
 if (specDrawerBottomClose) specDrawerBottomClose.addEventListener('click', closeDrawer);
 if (specDrawerBackdrop) specDrawerBackdrop.addEventListener('click', closeDrawer);
+
+const drawerBtnReturnDawn = document.getElementById('drawer-btn-return-dawn');
+if (drawerBtnReturnDawn) {
+  drawerBtnReturnDawn.addEventListener('click', () => {
+    closeDrawer();
+    lenis.start();
+    lenis.scrollTo(0, { duration: 1.8 });
+    setActiveNav('overview');
+  });
+}
 
 // ============================================================================
 // 9. BESPOKE PRIVATE INQUIRY MODAL

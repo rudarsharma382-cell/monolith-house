@@ -217,7 +217,7 @@ const COMPLETE_ARCHIVE = [
 
 export default function MaterialPortfolio() {
   const [collection, setCollection] = useState('signature'); // 'signature' | 'all'
-  const [projection, setProjection] = useState('cylinder'); // 'cylinder' | 'orbit'
+  const [projection, setProjection] = useState('orbit'); // 'orbit' | 'cylinder' | 'panorama'
   const [isDrifting, setIsDrifting] = useState(true);
   const [selectedChamber, setSelectedChamber] = useState(null);
 
@@ -270,16 +270,6 @@ export default function MaterialPortfolio() {
           {/* Camera Projection */}
           <div className="inline-flex rounded-lg p-1 bg-white/[0.03] border border-white/10 text-[10px] font-mono tracking-wider">
             <button
-              onClick={() => setProjection('cylinder')}
-              className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
-                projection === 'cylinder'
-                  ? 'bg-white/15 text-white font-medium shadow-sm'
-                  : 'text-neutral-400 hover:text-neutral-200'
-              }`}
-            >
-              ROTUNDA
-            </button>
-            <button
               onClick={() => setProjection('orbit')}
               className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
                 projection === 'orbit'
@@ -288,6 +278,16 @@ export default function MaterialPortfolio() {
               }`}
             >
               ORBITAL
+            </button>
+            <button
+              onClick={() => setProjection('cylinder')}
+              className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
+                projection === 'cylinder'
+                  ? 'bg-white/15 text-white font-medium shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+            >
+              ROTUNDA
             </button>
             <button
               onClick={() => setProjection('panorama')}
@@ -313,38 +313,32 @@ export default function MaterialPortfolio() {
         </div>
       </div>
 
-      {/* The 3D Architectural Rotunda Pavilion */}
-      <div className="relative w-full h-[580px] sm:h-[640px] md:h-[680px] rounded-2xl overflow-hidden bg-[#0c0d10] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.98)]">
-        {/* Subtle Architectural Corner Crosshairs */}
-        <div className="absolute top-3.5 left-4 text-white/20 font-mono text-xs select-none pointer-events-none">+</div>
-        <div className="absolute top-3.5 right-4 text-white/20 font-mono text-xs select-none pointer-events-none">+</div>
-        <div className="absolute bottom-3.5 left-4 text-white/20 font-mono text-xs select-none pointer-events-none">+</div>
-        <div className="absolute bottom-3.5 right-4 text-white/20 font-mono text-xs select-none pointer-events-none">+</div>
-
+      {/* Seamless Floating 3D Orbital Pavilion (Card removed, full atmospheric flow, no clipping) */}
+      <div className="relative w-full h-[620px] sm:h-[680px] md:h-[720px] overflow-visible select-none">
         <CircularCarousel
           items={activeItems}
           preset={projection}
           intro="rise"
-          cardWidth={350}
-          aspectRatio={0.70}
+          cardWidth={330}
+          aspectRatio={0.78}
           gap={32}
-          speed={10}
+          speed={8}
           autoplay={isDrifting ? 'drift' : 'off'}
           direction="left"
           draggable={true}
-          momentum={0.65}
+          momentum={0.75}
           snap={true}
-          pauseOnHover={true}
+          pauseOnHover={false}
           focusOnClick={true}
-          parallax={0.35}
-          stretch={0.3}
-          depthFade={0.52}
-          fadeColor="#0c0d10"
-          innerShade={0.4}
-          cornerRadius={18}
+          parallax={0.25}
+          stretch={0.25}
+          depthFade={0.45}
+          fadeColor="#050505"
+          innerShade={0.3}
+          cornerRadius={20}
           captions={true}
           onItemClick={(item) => setSelectedChamber(item)}
-          className="w-full h-full"
+          className="w-full h-full overflow-visible"
         />
       </div>
 

@@ -83,10 +83,10 @@ const PRESETS = {
   },
   orbit: {
     axis: 'y',
-    tilt: -16,
-    perspective: 1500,
+    tilt: -12,
+    perspective: 1600,
     curve: 0,
-    spread: 1.45,
+    spread: 1.4,
     inward: false,
     billboard: true,
     backfaces: false,
@@ -119,9 +119,9 @@ const PRESETS = {
 const INTRO_LENGTH = { assemble: 1500, rise: 1400, spin: 1800, none: 0 };
 const TILES = 8;
 const OVERLAP = 2.5;
-const DRAG_THRESHOLD = 5;
-const SPRING = 118;
-const SETTLE_SPEED = 9;
+const DRAG_THRESHOLD = 3;
+const SPRING = 68;
+const SETTLE_SPEED = 4;
 const CAPTION_SPACE = 76;
 const TO_RAD = Math.PI / 180;
 
@@ -369,7 +369,7 @@ const CircularCarousel = ({
       if (!rect.width || !rect.height) return;
       const room = s.captions ? CAPTION_SPACE : 0;
       const width = rect.width * 0.94;
-      const height = (rect.height - room) * 0.92;
+      const height = (rect.height - room) * 0.82;
       const P = s.perspective;
       let minX = Infinity;
       let maxX = -Infinity;
@@ -417,7 +417,8 @@ const CircularCarousel = ({
       const spanY = Math.max(maxY - minY, 1);
       const fit = Math.min(1, width / spanX, height / spanY);
       state.fit = fit;
-      state.shift = -((minY + maxY) / 2) * fit - room / 2;
+      const tiltBias = s.tilt < 0 ? -18 : 0;
+      state.shift = -((minY + maxY) / 2) * fit - room / 2 + tiltBias;
       state.drop = s.axis === 'x' ? (rect.width / fit) * 0.55 + s.cardW : (rect.height / fit) * 0.55 + s.cardH;
       stage.style.perspective = `${P}px`;
       stage.style.transform = `translate3d(0, ${state.shift}px, 0) scale(${fit})`;
